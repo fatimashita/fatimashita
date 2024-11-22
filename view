@@ -1,1 +1,39 @@
+<?php
+// اتصال بقاعدة البيانات
+$host = "localhost";
+$dbname = "event_booking";
+$username = "root";
+$password = "";
 
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
+}
+
+// دالة لعرض تفاصيل الحدث
+function viewEventDetails($eventId) {
+    global $pdo;
+
+    // استعلام لجلب تفاصيل الحدث
+    $query = "SELECT Title, Date, Location, Guests FROM Event WHERE EventID = ?";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$eventId]);
+    $event = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($event) {
+        echo "<h1>Event Details</h1>";
+        echo "<p><strong>Title:</strong> " . $event['Title'] . "</p>";
+        echo "<p><strong>Date:</strong> " . $event['Date'] . "</p>";
+        echo "<p><strong>Location:</strong> " . $event['Location'] . "</p>";
+        echo "<p><strong>Guests:</strong> " . $event['Guests'] . "</p>";
+    } else {
+        echo "Event not found.";
+    }
+}
+
+// استدعاء الدالة لعرض تفاصيل حدث معين
+$eventId = 1; // معرّف الحدث
+viewEventDetails($eventId);
+?>
