@@ -1,1 +1,48 @@
+<?php
+// Define the Event class to represent an event
+class Event {
+    private $eventId;   // Event ID
+    private $title;     // Event title
+    private $date;      // Event date
+    private $location;  // Event location
+    private $price;     // Event price
+    private $isVip;     // VIP status (true/false)
+
+    // Constructor to initialize the Event object
+    public function __construct($eventId, $title, $date, $location, $price, $isVip) {
+        $this->eventId = $eventId;
+        $this->title = $title;
+        $this->date = $date;
+        $this->location = $location;
+        $this->price = $price;
+        $this->isVip = $isVip;
+    }
+
+    // Method to display the event details
+    public function viewDetails() {
+        echo "Event Details:" . PHP_EOL;
+        echo "Event ID: " . $this->eventId . PHP_EOL;
+        echo "Title: " . $this->title . PHP_EOL;
+        echo "Date: " . $this->date . PHP_EOL;
+        echo "Location: " . $this->location . PHP_EOL;
+        echo "Price: $" . number_format($this->price, 2) . PHP_EOL;
+        echo "VIP Only: " . ($this->isVip ? "Yes" : "No") . PHP_EOL;
+    }
+}
+
+// Example usage:
+
+// Create an Event object with sample data
+$event = new Event(
+    "E123",         // Event ID
+    "Music Festival", // Event Title
+    "2024-12-25",   // Date
+    "Central Park", // Location
+    200.00,         // Price
+    true            // VIP status
+);
+
+// Call the method to view the event details
+$event->viewDetails();
+?>
 
