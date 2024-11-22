@@ -1,0 +1,68 @@
+<?php
+// Define the Event class to represent an event
+class Event {
+    private $eventId;
+    private $title;
+    private $date;
+    private $location;
+    private $price;
+    private $isVip;
+
+    // Constructor to initialize the Event object
+    public function __construct($eventId, $title, $date, $location, $price, $isVip) {
+        $this->eventId = $eventId;
+        $this->title = $title;
+        $this->date = $date;
+        $this->location = $location;
+        $this->price = $price;
+        $this->isVip = $isVip;
+    }
+
+    // Getter for event title
+    public function getTitle() {
+        return $this->title;
+    }
+
+    // Getter for event ID
+    public function getEventId() {
+        return $this->eventId;
+    }
+}
+
+// Define the GiftTicket class to handle the gift ticket system
+class GiftTicket {
+    private $giftId;
+    private $sender;
+    private $receiver;
+    private $event;
+
+    // Constructor to initialize the GiftTicket object
+    public function __construct($giftId, $sender, $receiver, Event $event) {
+        $this->giftId = $giftId;
+        $this->sender = $sender;
+        $this->receiver = $receiver;
+        $this->event = $event;
+    }
+
+    // Method to send the gift ticket
+    public function sendGift() {
+        // Simulate sending a gift by displaying a message
+        echo "Gift Ticket Sent Successfully!" . PHP_EOL;
+        echo "Gift ID: " . $this->giftId . PHP_EOL;
+        echo "From: " . $this->sender . PHP_EOL;
+        echo "To: " . $this->receiver . PHP_EOL;
+        echo "Event: " . $this->event->getTitle() . PHP_EOL;
+    }
+}
+
+// Example usage
+
+// Create an Event object
+$event = new Event("E123", "Concert Night", "2024-12-01", "City Hall", 150.00, false);
+
+// Create a GiftTicket object
+$giftTicket = new GiftTicket("GFT456", "John Doe", "Jane Smith", $event);
+
+// Send the gift ticket
+$giftTicket->sendGift();
+?>
